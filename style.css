@@ -15,7 +15,7 @@ body {
 }
 
 .nav-header {
-  min-height: 10vh;
+  height: 10vh;
   font-size: 1rem;
   display: flex;
   align-items: center;
@@ -36,8 +36,9 @@ body {
 }
 
 .slide {
-  min-height: 90vh;
+  height: 90vh;
   margin: 0 auto 0 auto;
+  padding-bottom: 10px;
   width: 80%;
   display: flex;
   justify-content: space-between;
