@@ -1,3 +1,7 @@
+:root {
+  --background: #17181a;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,7 +9,7 @@
 }
 
 body {
-  background-color: #17181a;
+  background-color: var(--background);
   font-family: "Montserrat", sans-serif;
 }
 
@@ -44,7 +48,7 @@ body {
   justify-content: space-between;
   align-items: center;
   color: #fff;
-  background-color: #17181a;
+  background-color: var(--background);
 }
 
 .hero-desc {
@@ -152,7 +156,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background-color: #17181a;
+  background-color: var(--background);
   left: 0;
   top: 0;
 }
