@@ -21,6 +21,19 @@ function animateSlides() {
     //-=1 so that it animate at the same time with the revealImg
     slideTl.fromTo(revealText, { x: "0%" }, { x: "100%", duration: 1 }, "-=1");
     slideTl.fromTo(nav, { y: "-100%" }, { y: "0%", duration: 1 }, "-=0.5");
+    //Create scene
+    slideScene = new ScrollMagic.Scene({
+      triggerElement: slide,
+      triggerHook: 0.25,
+      reverse: false,
+    })
+      .setTween(slideTl)
+      .addIndicators({
+        colorStart: "white",
+        colorTrigger: "white",
+        name: "slide",
+      })
+      .addTo(controller);
   });
 }
 
