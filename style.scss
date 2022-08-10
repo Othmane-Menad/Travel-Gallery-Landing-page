@@ -167,3 +167,7 @@ body {
   border-radius: 50%;
   position: absolute;
 }
+
+.scrollmagic-pin-spacer {
+  position: static !important; //so you can click button  when scrolling
+}

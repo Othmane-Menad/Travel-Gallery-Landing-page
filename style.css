@@ -171,4 +171,8 @@ body {
   position: absolute;
 }
 
+.scrollmagic-pin-spacer {
+  position: static !important;
+}
+
 /*# sourceMappingURL=style.css.map */
