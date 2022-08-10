@@ -170,6 +170,11 @@ body {
   border-radius: 50%;
   position: absolute;
   transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+.cursor.nav-active {
+  background: rgb(86, 124, 228);
+  transform: scale(3);
 }
 
 .scrollmagic-pin-spacer {

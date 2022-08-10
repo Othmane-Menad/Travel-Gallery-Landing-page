@@ -26,7 +26,7 @@ function animateSlides() {
     slideScene = new ScrollMagic.Scene({
       triggerElement: slide,
       triggerHook: 0.25,
-      reverse: true,
+      reverse: false,
     })
       .setTween(slideTl)
       .addIndicators({
@@ -58,13 +58,24 @@ function animateSlides() {
       .addTo(controller);
   });
 }
-
-function cursor(e) {
-  let mouse = document.querySelector(".cursor");
-  mouse.style.top = e.pageY + "px";
-  mouse.style.left = e.pageX + "px";
+let cursor = document.querySelector(".cursor");
+function cursorfnc(e) {
+  cursor.style.top = e.pageY + "px";
+  cursor.style.left = e.pageX + "px";
 }
 
-window.addEventListener("mousemove", cursor);
+function activeCursor(e) {
+  const item = e.target;
+
+  if (item.id === "logo" || item.classList.contains("burger")) {
+    console.log(item.id);
+    cursor.classList.add("nav-active");
+  } else {
+    cursor.classList.remove("nav-active");
+  }
+}
+
+window.addEventListener("mousemove", cursorfnc);
+window.addEventListener("mouseover", activeCursor);
 
 animateSlides();
