@@ -59,6 +59,7 @@ function animateSlides() {
   });
 }
 let cursor = document.querySelector(".cursor");
+let cursorText = cursor.querySelector("span");
 function cursorfnc(e) {
   cursor.style.top = e.pageY + "px";
   cursor.style.left = e.pageX + "px";
@@ -68,14 +69,22 @@ function activeCursor(e) {
   const item = e.target;
 
   if (item.id === "logo" || item.classList.contains("burger")) {
-    console.log(item.id);
     cursor.classList.add("nav-active");
   } else {
     cursor.classList.remove("nav-active");
   }
+  if (item.classList.contains("explore")) {
+    cursor.classList.add("explore-active");
+    gsap.to(".title-swipe", 1, { y: "0%" });
+    cursorText.innerText = "tap";
+  } else {
+    cursor.classList.remove("explore-active");
+    cursorText.innerText = "";
+    gsap.to(".title-swipe", 1, { y: "100%" });
+  }
 }
 
 window.addEventListener("mousemove", cursorfnc);
-window.addEventListener("mouseover", activeCursor);
+window.addEventListener("mouseover", activeCursor); // for the color change
 
 animateSlides();
