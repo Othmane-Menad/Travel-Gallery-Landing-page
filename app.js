@@ -102,6 +102,19 @@ function navToggle(e) {
     document.body.classList.remove("hide");
   }
 }
+
+// Barbra page transition
+barba.init({
+  views: [
+    {
+      namespace: "home",
+    },
+    {
+      namespace: "fashion",
+    },
+  ],
+});
+// Events listeners
 burger.addEventListener("click", navToggle);
 window.addEventListener("mousemove", cursorfnc);
 window.addEventListener("mouseover", activeCursor); // for the color change
