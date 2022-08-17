@@ -104,19 +104,70 @@ function navToggle(e) {
 }
 
 // Barbra page transition
+const logo = document.querySelector("#logo");
 barba.init({
   views: [
     {
       namespace: "home",
+
+      //beforeenterand beforeleave: run certain functionality to certain page is this case HOME page
+      beforeEnter() {
+        animateSlides();
+        logo.href = "./index.html";
+      },
+      beforeLeave() {
+        slideScene.destroy();
+        pageScene.destroy();
+        controller.destroy();
+      },
     },
     {
-      namespace: "fashion",
+      namespace: "explore",
+      beforeEnter() {
+        logo.href = "../index.html";
+      },
     },
   ],
+  transitions: [
+    {
+      name: "opacity-transition",
+      leave(data) {
+        const jp = gsap.timeline();
+        jp.to(data.current.container, {
+          opacity: 0,
+          duration: 2,
+        });
+      },
+      enter(data) {
+        const jp = gsap.timeline();
+        jp.from(data.next.container, {
+          opacity: 0,
+          duration: 2,
+        });
+      },
+    },
+  ],
+  // transitions: [
+  //   {
+  //     leave({ current, next }) {
+  //       let done = this.async();
+  //       // Animation
+  //       const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+  //       tl.fromTo(current.container, 1, { opacity: 1 }, { opacity: 0 });
+  //     },
+  //     enter({ current, next }) {
+  //       // Scroll to the top
+  //       windows.scrollTo(0, 0);
+  //       let done = this.async();
+  //       const tl = gsap.timeline({ defaults: { ease: "power2.inOut" } });
+  //       tl.fromTo(next.container, 1, { opacity: 0 }, { opacity: 1 });
+  //     },
+  //   },
+  // ],
 });
 // Events listeners
 burger.addEventListener("click", navToggle);
 window.addEventListener("mousemove", cursorfnc);
 window.addEventListener("mouseover", activeCursor); // for the color change
 
-animateSlides();
+// animateSlides(); //here the animation work for all pages we put it in barba to run it on specific page
