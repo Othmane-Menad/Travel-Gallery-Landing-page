@@ -320,4 +320,18 @@ main {
   z-index: 3;
 }
 
+@media screen and (max-width: 1024px) {
+  main {
+    width: 100%;
+    margin: 0;
+  }
+  .slide {
+    width: 100%;
+    text-align: center;
+  }
+  .hero-desc {
+    padding: 0;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

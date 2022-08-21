@@ -1,6 +1,7 @@
 let controller;
 let slideScene;
 let pageScene;
+let detailScene;
 
 function animateSlides() {
   // Init Controller
@@ -21,7 +22,7 @@ function animateSlides() {
     slideTl.fromTo(img, { scale: 2 }, { scale: 1, duration: 1 }, "-=1");
     //-=1 so that it animate at the same time with the revealImg
     slideTl.fromTo(revealText, { x: "0%" }, { x: "100%", duration: 1 }, "-=1");
-    slideTl.fromTo(nav, { y: "-100%" }, { y: "0%", duration: 1 }, "-=0.5");
+
     //Create scene
     slideScene = new ScrollMagic.Scene({
       triggerElement: slide,
@@ -61,6 +62,8 @@ function animateSlides() {
 const cursor = document.querySelector(".cursor");
 const cursorText = cursor.querySelector("span");
 const burger = document.querySelector(".burger");
+
+// circle following the cursor effect
 function cursorfnc(e) {
   cursor.style.top = e.pageY + "px";
   cursor.style.left = e.pageX + "px";
@@ -85,6 +88,7 @@ function activeCursor(e) {
   }
 }
 
+// Nav full page
 function navToggle(e) {
   if (!e.target.classList.contains("active")) {
     e.target.classList.add("active");
@@ -102,7 +106,10 @@ function navToggle(e) {
     document.body.classList.remove("hide");
   }
 }
-
+// scroll up the page when loaded
+// barba.hooks.beforeOnce((data) => {
+//   windows.scrollTo(0, 0);
+// });
 // Barbra page transition
 const logo = document.querySelector("#logo");
 barba.init({
@@ -125,25 +132,46 @@ barba.init({
       namespace: "explore",
       beforeEnter() {
         logo.href = "../index.html";
+        exploreAnimation();
+      },
+      beforeLeave() {
+        controller.destroy();
+        detailScene.destroy();
       },
     },
   ],
   transitions: [
     {
-      name: "opacity-transition",
       leave(data) {
+        let done = this.async();
         const jp = gsap.timeline();
         jp.to(data.current.container, {
           opacity: 0,
-          duration: 2,
+          duration: 1,
         });
+        jp.fromTo(
+          ".swipe",
+          0.75,
+          { x: "-100%" },
+          { x: "0%", onComplete: done },
+          "-=0.5"
+        );
       },
       enter(data) {
+        let done = this.async();
+        window.scrollTo(0, 0);
         const jp = gsap.timeline();
         jp.from(data.next.container, {
           opacity: 0,
-          duration: 2,
+          duration: 1,
         });
+        jp.fromTo(
+          ".swipe",
+          1,
+          { x: "0%" },
+          { x: "100%", stagger: 0.25, onComplete: done }
+        );
+        jp.fromTo(".nav-header", 1, { y: "-100%" }, { y: "0%" }, "-=1.5"); //just for nav to show up if you scroll fast
       },
     },
   ],
@@ -165,6 +193,35 @@ barba.init({
   //   },
   // ],
 });
+
+// Scroll animation for the product page
+function exploreAnimation() {
+  controller = new ScrollMagic.Controller();
+  const slides = document.querySelectorAll(".detail-slide");
+  slides.forEach((slide, index, slides) => {
+    const slideTl = gsap.timeline({ defaults: { duration: 1 } });
+    let nextSlide = slides.length - 1 === index ? "end" : slides[index + 1]; //to select the next slide
+    const nextImg = nextSlide.querySelector("img");
+    slideTl.fromTo(slide, { opacity: 1 }, { opacity: 0 });
+    slideTl.fromTo(nextSlide, { opacity: 0 }, { opacity: 1 }, "-=0.5");
+    slideTl.fromTo(nextImg, { x: "50%" }, { x: "0%" });
+    //Scene
+    detailScene = new ScrollMagic.Scene({
+      triggerElement: slide,
+      duration: "90%",
+      triggerHook: 0,
+    })
+      .setPin(slide, { pushFollowers: false })
+      .setTween(slideTl)
+      .addIndicators({
+        colorStart: "white",
+        colorTrigger: "white",
+        name: "explore",
+        indent: 200,
+      })
+      .addTo(controller);
+  });
+}
 // Events listeners
 burger.addEventListener("click", navToggle);
 window.addEventListener("mousemove", cursorfnc);
