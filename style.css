@@ -158,7 +158,6 @@ body {
 
 .reveal-img,
 .reveal-text {
-  display: none;
   position: absolute;
   width: 100%;
   height: 150%;
@@ -346,6 +345,38 @@ main {
   .hero-desc .explore {
     align-self: center;
   }
+  .hero-desc .reveal-img,
+.hero-desc .reveal-text {
+    display: none;
+  }
+}
+.nav-bar {
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-link {
+  font-size: 2rem;
+  flex-basis: 0rem;
+}
+
+.nav-link h3 {
+  padding: 1rem 0rem;
+}
+
+.contact {
+  flex-basis: 0rem;
+  padding: 0rem 1rem;
+}
+
+.contact h2 {
+  font-size: 2rem;
+  padding: 1rem 0rem;
+}
+
+.contact p {
+  font-size: 1rem;
 }
 
 /*# sourceMappingURL=style.css.map */
