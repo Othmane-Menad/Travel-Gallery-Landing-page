@@ -30,11 +30,11 @@ function animateSlides() {
       reverse: true,
     })
       .setTween(slideTl)
-      .addIndicators({
-        colorStart: "white",
-        colorTrigger: "white",
-        name: "slide",
-      })
+      // .addIndicators({
+      //   colorStart: "white",
+      //   colorTrigger: "white",
+      //   name: "slide",
+      // })
       .addTo(controller);
     // New animation
     const pageTl = gsap.timeline();
@@ -48,12 +48,12 @@ function animateSlides() {
       duration: "90%", //take the whole width
       triggerHook: 0,
     })
-      .addIndicators({
-        colorStart: "white",
-        colorTrigger: "white",
-        name: "page",
-        indent: 200,
-      })
+      // .addIndicators({
+      //   colorStart: "white",
+      //   colorTrigger: "white",
+      //   name: "page",
+      //   indent: 200,
+      // })
       .setPin(slide, { pushFollowers: false }) //pushFollowers to elemenate the weird big white space betwen slides
       .setTween(pageTl)
       .addTo(controller);
@@ -213,12 +213,12 @@ function exploreAnimation() {
     })
       .setPin(slide, { pushFollowers: false })
       .setTween(slideTl)
-      .addIndicators({
-        colorStart: "white",
-        colorTrigger: "white",
-        name: "explore",
-        indent: 200,
-      })
+      // .addIndicators({
+      //   colorStart: "white",
+      //   colorTrigger: "white",
+      //   name: "explore",
+      //   indent: 200,
+      // })
       .addTo(controller);
   });
 }
