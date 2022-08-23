@@ -156,6 +156,7 @@ body {
 
 .reveal-img,
 .reveal-text {
+  display: none;
   position: absolute;
   width: 100%;
   height: 150%;
@@ -321,13 +322,27 @@ main {
 @media screen and (max-width: 1024px) {
   main {
     width: 100%;
-    margin: 0;
   }
   .slide {
+    // display: block;
+    flex-direction: column;
+    justify-content: center;
     width: 100%;
     text-align: center;
   }
   .hero-desc {
     padding: 0;
+    justify-content: flex-start;
+    margin-top: 2rem;
+    h2 {
+      font-size: 1.5rem;
+    }
+    p {
+      font-size: 0.7rem;
+      max-width: 350px;
+    }
+    .explore {
+      align-self: center;
+    }
   }
 }
