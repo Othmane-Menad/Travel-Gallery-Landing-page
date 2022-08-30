@@ -112,6 +112,15 @@ function navToggle(e) {
 // });
 // Barbra page transition
 const logo = document.querySelector("#logo");
+
+delay = (n) => {
+  n = n || 2000;
+  return new Promise((done) => {
+    setTimeout(() => {
+      done();
+    }, n);
+  });
+};
 barba.init({
   views: [
     {
@@ -140,6 +149,7 @@ barba.init({
       },
     },
   ],
+
   transitions: [
     {
       leave(data) {
@@ -147,7 +157,7 @@ barba.init({
         const jp = gsap.timeline();
         jp.to(data.current.container, {
           opacity: 0,
-          duration: 1,
+          duration: 0.75,
         });
         jp.fromTo(
           ".swipe",
@@ -165,6 +175,7 @@ barba.init({
           opacity: 0,
           duration: 1,
         });
+
         jp.fromTo(
           ".swipe",
           1,
